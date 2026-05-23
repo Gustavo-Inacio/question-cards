@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             card.innerHTML = `
                 <p class="text-ink dark:text-white text-[16px] leading-relaxed pr-4 font-medium">${question.text}</p>
-                <button onclick="removeQuestion(${index})" class="text-muted dark:text-muted-dark hover:text-rausch p-2 rounded-full hover:bg-red-50 dark:hover:bg-white/10 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100">
+                <button onclick="removeQuestion(${index})" class="text-muted dark:text-muted-dark hover:text-rausch p-2 rounded-full hover:bg-red-50 dark:hover:bg-white/10 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
@@ -412,6 +412,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     btnStart.addEventListener('click', goToConfig);
+
+    document.getElementById('btn-regenerate-review').addEventListener('click', () => {
+        gerarBaralho();
+        renderReviewList();
+    });
     
     document.getElementById('btn-add-custom').addEventListener('click', addCustomQuestion);
     document.getElementById('input-custom-question').addEventListener('keypress', (e) => {

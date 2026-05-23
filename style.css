@@ -29,7 +29,7 @@ input[type="range"] {
     appearance: none;
     width: 100%;
     height: 8px; /* Track height */
-    background: var(--tw-colors-hairline-soft); /* Use Tailwind color variable */
+    background: #ebebeb; /* Cor hairline-soft explícita para o modo claro */
     border-radius: 9999px; /* Full rounded track */
     outline: none;
     transition: opacity .2s;
