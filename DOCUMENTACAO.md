@@ -1,6 +1,6 @@
-# Documentação Técnica - CupidCards
+# Documentação Técnica - cartasdecasal
 
-O **CupidCards** é um Web App SPA (Single Page Application) desenvolvido para casais, focado em fortalecer a conexão através de perguntas curadas. O sistema utiliza uma estética inspirada no design do Airbnb (limpo, tipografia forte e cantos arredondados) com suporte nativo a Modo Escuro.
+O **cartasdecasal.com.br** é um Web App SPA (Single Page Application) desenvolvido para casais, focado em fortalecer a conexão através de perguntas curadas. O sistema utiliza uma estética inspirada no design do Airbnb (limpo, tipografia forte e cantos arredondados) com suporte nativo a Modo Escuro.
 
 ---
 
@@ -106,4 +106,4 @@ O sistema não faz um sorteio puramente aleatório. Ele utiliza os pesos dos sli
 
 ---
 
-**Documentação gerada para a versão 1.0.0 do CupidCards.**
+**Documentação gerada para a versão 1.0.0 do cartasdecasal.com.br.**

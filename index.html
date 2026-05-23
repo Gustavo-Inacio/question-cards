@@ -1,9 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CupidCards | Conectando Corações</title>
+    
+    <!-- SEO Base -->
+    <title>Cartas de Casal | Fortaleça sua Sintonia e Conexão de Casal</title>
+    <meta name="description" content="Descubram novas camadas do seu relacionamento com perguntas curadas, momentos de reflexão e uma retrospectiva única. O jogo ideal para casais fortalecerem sua sintonia.">
+    <meta name="keywords" content="jogo de casal, perguntas para namorados, conexão de casal, cupidcards, relacionamento, retrospectiva de casal">
+    <meta name="author" content="cartasdecasal">
+    <link rel="canonical" href="https://cartasdecasal.com.br" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cartasdecasal.com.br">
+    <meta property="og:title" content="Cartas de Casal | Fortaleça sua Sintonia">
+    <meta property="og:description" content="Perguntas curadas para casais que buscam profundidade e diversão. Gratuito, privado e feito para conectar.">
+    <meta property="og:image" content="https://cartasdecasal.com.br/assets/question-cards.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cartasdecasal.com.br">
+    <meta property="twitter:title" content="Cartas de Casal | Fortaleça sua Sintonia">
+    <meta property="twitter:description" content="Perguntas curadas para casais que buscam profundidade e diversão.">
+    <meta property="twitter:image" content="https://cartasdecasal.com.br/assets/question-cards.webp">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/question-cards-ico.ico">
+    <link rel="apple-touch-icon" href="/assets/question-cards-ico.ico">
+    <meta name="theme-color" content="#ff385c">
+
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter (Substitute for Airbnb Cereal) -->
@@ -43,6 +69,25 @@
             }
         }
     </script>
+
+    <!-- Dados Estruturados (JSON-LD) para o Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Cartas de Casal",
+      "url": "https://cartasdecasal.com.br",
+      "description": "Aplicativo web de entretenimento e relacionamento projetado para fortalecer a conexão de casais através de perguntas curadas e retrospectivas.",
+      "applicationCategory": "EntertainmentApplication",
+      "genre": "Relationship",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "BRL"
+      },
+      "operatingSystem": "All"
+    }
+    </script>
 </head>
 <body class="bg-white dark:bg-ink-dark text-ink dark:text-white font-sans antialiased transition-colors duration-300">
 
@@ -59,7 +104,7 @@
             <!-- Header/Logo Area -->
             <div class="mb-12 flex items-center gap-2">
                 <div class="w-8 h-8 bg-rausch rounded-airbnb-sm flex items-center justify-center text-white font-bold italic">C</div>
-                <span class="text-ink dark:text-white text-xl font-bold tracking-tight">CupidCards</span>
+                <span class="text-ink dark:text-white text-xl font-bold tracking-tight">Cartas de Casal</span>
             </div>
 
             <!-- Hero Section -->
@@ -99,6 +144,7 @@
                     Montar nosso Baralho
                 </button>
                 <p class="text-muted text-[12px] uppercase tracking-widest font-bold">100% Gratuito & Privado</p>
+                <a href="privacidade.html" class="text-zinc-400 hover:underline text-xs mt-12">Política de Privacidade</a>
             </div>
         </section>
 
@@ -321,7 +367,7 @@
             <div class="relative mb-12">
                 <div id="shareable-card" class="w-[320px] aspect-[9/16] bg-gradient-to-br from-rausch to-plus p-8 flex flex-col items-center justify-between text-white text-center rounded-airbnb-lg shadow-2xl overflow-hidden">
                     <div class="w-full">
-                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80">CupidCards</span>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80">Cartas de Casal</span>
                         <h4 id="display-names" class="text-lg font-bold mt-2 truncate">Você & Seu Par</h4>
                         <div class="mt-6">
                             <p class="text-[10px] uppercase tracking-widest opacity-80">Sintonia Geral</p>
@@ -336,7 +382,7 @@
 
                     <div class="w-full">
                         <p class="text-[10px] opacity-90 italic">"Conectados através de cada pergunta."</p>
-                        <p class="text-[11px] font-bold tracking-wide mt-4">Façam o teste em cupidcards.com</p>
+                        <p class="text-[11px] font-bold tracking-wide mt-4">Façam o teste em cartasdecasal.com.br</p>
                     </div>
                 </div>
             </div>
@@ -359,6 +405,7 @@
                 <button onclick="location.reload()" class="text-muted hover:text-ink font-medium transition-all text-sm">
                     Jogar Novamente
                 </button>
+                <a href="privacidade.html" class="text-zinc-400 hover:underline text-xs mt-8">Política de Privacidade</a>
             </div>
         </section>
     </main>

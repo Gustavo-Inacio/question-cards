@@ -274,19 +274,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             const canvas = await html2canvas(shareableCard, { scale: 2, useCORS: true });
             const dataUrl = canvas.toDataURL('image/png');
             const blob = await (await fetch(dataUrl)).blob();
-            const file = new File([blob], 'cupidcards-result.png', { type: 'image/png' });
+            const file = new File([blob], 'cartasdecasal-result.png', { type: 'image/png' });
 
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 await navigator.share({
                     title: 'Nosso Raio-X de Casal!',
-                    text: 'Veja nossa sintonia no CupidCards!',
+                    text: 'Veja nossa sintonia no cartasdecasal!',
                     url: window.location.href,
                     files: [file]
                 });
             } else {
                 // Fallback para Desktop
                 const link = document.createElement('a');
-                link.download = 'cupidcards-result.png';
+                link.download = 'cartasdecasal-result.png';
                 link.href = dataUrl;
                 link.click();
                 navigator.clipboard.writeText(window.location.href);
