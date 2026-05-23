@@ -118,13 +118,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Navigation function
+    const goToHome = () => {
+        screenConfig.classList.add('hidden');
+        screenHome.classList.remove('hidden');
+    };
+
     const goToConfig = () => {
         screenHome.classList.add('hidden');
+        screenReview.classList.add('hidden');
+        screenGame.classList.add('hidden');
         screenConfig.classList.remove('hidden');
     };
     
     const goToReview = () => {
         screenConfig.classList.add('hidden');
+        screenGame.classList.add('hidden');
         screenReview.classList.remove('hidden');
         renderReviewList();
     };
@@ -328,6 +336,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderGameCard = () => {
         const question = currentDeck[currentIndex];
+        const btnPrev = document.getElementById('btn-game-prev');
+        
+        // Habilita/Desabilita botão de pergunta anterior
+        btnPrev.disabled = currentIndex === 0;
         
         // Aplica fade out antes de trocar o texto
         gameCardContainer.classList.add('opacity-0');
@@ -349,6 +361,14 @@ document.addEventListener('DOMContentLoaded', () => {
             renderGameCard();
         } else {
             goToResult();
+        }
+    };
+
+    const prevQuestion = () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            gameResults.pop();
+            renderGameCard();
         }
     };
 
@@ -407,6 +427,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('btn-back-to-history').addEventListener('click', goToHistory);
     
+    // Navigation Event Listeners
+    document.getElementById('btn-config-back').addEventListener('click', goToHome);
+    document.getElementById('btn-review-back').addEventListener('click', goToConfig);
+    document.getElementById('btn-game-back-config').addEventListener('click', goToConfig);
+    document.getElementById('btn-game-prev').addEventListener('click', prevQuestion);
+    document.getElementById('btn-history-back').addEventListener('click', goToResult);
+
     // Tarefa 3: Controle de Rotas e Lógica de Ramificação
     btnPlaySurprise.addEventListener('click', () => {
         gerarBaralho();

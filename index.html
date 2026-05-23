@@ -104,6 +104,13 @@
 
         <!-- Tarefa 1 (UI): Tela de Configuração (screen-config) -->
         <section id="screen-config" class="hidden min-h-screen flex flex-col items-center justify-center px-6 py-12 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <!-- Botão Voltar para Home -->
+            <button id="btn-config-back" class="absolute top-6 left-6 text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
             <div class="text-center mb-12">
                 <h2 class="text-[40px] md:text-[56px] font-bold tracking-tight leading-tight mb-4 text-ink dark:text-white">
                     Ajuste a <span class="text-rausch">Vibe</span> do Baralho
@@ -156,6 +163,13 @@
 
         <!-- Tarefa 1 & 2: Tela de Revisão (screen-review) -->
         <section id="screen-review" class="hidden min-h-screen flex flex-col items-center px-6 pt-16 pb-32 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <!-- Botão Voltar para Config -->
+            <button id="btn-review-back" class="absolute top-6 left-6 text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
             <div class="text-center mb-10">
                 <h2 class="text-[32px] md:text-[40px] font-bold tracking-tight text-ink dark:text-white">Quase pronto!</h2>
                 <p class="text-muted dark:text-muted-dark mt-2 text-[18px]">Revise e personalize a seleção final.</p>
@@ -185,6 +199,20 @@
 
         <!-- Tarefa 1, 2 & 3: Tela Principal do Jogo (screen-game) -->
         <section id="screen-game" class="hidden min-h-screen flex flex-col items-center justify-between px-6 py-4 md:py-10 max-w-4xl mx-auto overflow-hidden bg-white dark:bg-ink-dark">
+            <!-- Barra de Navegação do Jogo -->
+            <div class="w-full flex justify-between items-center max-w-xl z-10">
+                <button id="btn-game-back-config" class="text-xs font-bold uppercase tracking-widest text-muted dark:text-muted-dark hover:text-rausch transition-all flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Configurar
+                </button>
+                <button id="btn-game-prev" class="text-xs font-bold uppercase tracking-widest text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed">
+                    ← Anterior
+                </button>
+            </div>
+
             <!-- Tarefa 1: Ad Slot Top -->
             <div class="ad-placeholder w-full max-w-xl h-16 md:h-24 bg-surface-soft dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-md flex items-center justify-center text-muted dark:text-muted-dark text-xs md:text-sm italic">
                 Espaço do Anúncio
@@ -218,6 +246,13 @@
 
         <!-- Tarefa 2 & 3: Tela de Histórico (screen-history) -->
         <section id="screen-history" class="hidden min-h-screen flex flex-col items-center px-6 py-10 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <!-- Botão Voltar para Resumo -->
+            <button id="btn-history-back" class="absolute top-6 left-6 text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
             <div class="text-center mb-10">
                 <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-muted dark:text-muted-dark">Recapitulação</span>
                 <h2 class="text-[32px] md:text-[40px] font-bold text-ink dark:text-white mt-2">Nossas Respostas</h2>
