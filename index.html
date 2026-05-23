@@ -163,15 +163,15 @@
         </section>
 
         <!-- Tarefa 1, 2 & 3: Tela Principal do Jogo (screen-game) -->
-        <section id="screen-game" class="hidden min-h-screen flex flex-col items-center justify-between px-6 py-10 max-w-4xl mx-auto overflow-hidden">
+        <section id="screen-game" class="hidden min-h-screen flex flex-col items-center justify-between px-6 py-4 md:py-10 max-w-4xl mx-auto overflow-hidden">
             <!-- Tarefa 1: Ad Slot Top -->
-            <div class="ad-placeholder w-full max-w-xl h-24 bg-surface-soft border border-hairline-soft rounded-airbnb-md flex items-center justify-center text-muted text-sm italic">
+            <div class="ad-placeholder w-full max-w-xl h-16 md:h-24 bg-surface-soft border border-hairline-soft rounded-airbnb-md flex items-center justify-center text-muted text-xs md:text-sm italic">
                 Espaço do Anúncio
             </div>
 
             <!-- Tarefa 2: O Card -->
             <div id="game-card-container" class="flex-1 flex flex-col items-center justify-center w-full max-w-md transition-all duration-300">
-                <div class="bg-white w-full aspect-[3/4] p-10 rounded-airbnb-lg shadow-lg border border-hairline-soft flex flex-col items-center justify-center text-center relative transform transition-transform hover:scale-[1.02]">
+                <div class="bg-white w-full aspect-[3/4] p-6 md:p-10 rounded-airbnb-lg shadow-lg border border-hairline-soft flex flex-col items-center justify-center text-center relative transform transition-transform hover:scale-[1.02]">
                     <span id="game-card-category" class="absolute top-10 text-[10px] font-bold uppercase tracking-[0.2em] text-muted">Categoria</span>
                     <p id="game-card-text" class="text-[24px] md:text-[28px] font-semibold text-ink leading-relaxed">
                         Carregando pergunta...
@@ -179,7 +179,7 @@
                 </div>
 
                 <!-- Tarefa 3: Botões de Interação -->
-                <div class="grid grid-cols-2 gap-4 w-full mt-10">
+                <div class="grid grid-cols-2 gap-4 w-full mt-6 md:mt-10">
                     <button id="btn-disagree" class="bg-surface-soft hover:bg-hairline-soft text-ink text-[16px] font-semibold py-5 rounded-airbnb-md transition-all transform active:scale-95">
                         Discordamos
                     </button>
@@ -190,20 +190,20 @@
             </div>
 
             <!-- Tarefa 1: Ad Slot Bottom -->
-            <div class="ad-placeholder w-full max-w-xl h-24 bg-surface-soft border border-hairline-soft rounded-airbnb-md flex items-center justify-center text-muted text-sm italic mt-10">
+            <div class="ad-placeholder w-full max-w-xl h-16 md:h-24 bg-surface-soft border border-hairline-soft rounded-airbnb-md flex items-center justify-center text-muted text-xs md:text-sm italic mt-6 md:mt-10">
                 Espaço do Anúncio
             </div>
         </section>
 
         <!-- Tarefa 1 & 2: Tela de Resultados (screen-result) -->
-        <section id="screen-result" class="hidden min-h-screen flex flex-col items-center px-6 py-16 max-w-4xl mx-auto">
-            <div class="text-center mb-10">
-                <div class="w-16 h-16 bg-surface-soft rounded-full flex items-center justify-center text-2xl mx-auto mb-6">✨</div>
-                <h2 id="result-title" class="text-[32px] md:text-[40px] font-bold text-ink mb-4 leading-tight">Calculando sintonia...</h2>
+        <section id="screen-result" class="hidden min-h-screen flex flex-col items-center px-6 py-8 md:py-16 max-w-4xl mx-auto">
+            <div class="text-center mb-6 md:mb-10">
+                <div class="w-12 h-12 md:w-16 md:h-16 bg-surface-soft rounded-full flex items-center justify-center text-xl md:text-2xl mx-auto mb-4 md:mb-6">✨</div>
+                <h2 id="result-title" class="text-[28px] md:text-[40px] font-bold text-ink mb-2 md:mb-4 leading-tight">Calculando sintonia...</h2>
                 
                 <!-- Tarefa 1: Painel de Personalização -->
-                <div class="w-full max-w-md mx-auto mb-10 space-y-6">
-                    <div class="flex gap-3">
+                <div class="w-full max-w-md mx-auto mb-6 md:mb-10 space-y-4 md:space-y-6">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-3">
                         <input type="text" id="input-name1" placeholder="Seu Nome" 
                             class="flex-1 p-3 border border-hairline-soft rounded-airbnb-sm outline-none focus:border-rausch transition-all text-sm">
                         <input type="text" id="input-name2" placeholder="Nome do Mozão" 
@@ -230,7 +230,7 @@
                     <div id="bar-disagree" class="bg-hairline-soft h-full transition-all duration-1000"></div>
                 </div>
 
-                <div class="flex justify-between text-sm font-medium text-muted max-w-md mx-auto px-1">
+                <div class="flex justify-between text-xs md:text-sm font-medium text-muted max-w-md mx-auto px-1">
                     <span>Concordamos: <span id="count-agree" class="text-[#065f46]">0</span></span>
                     <span>Discordamos: <span id="count-disagree" class="text-ink">0</span></span>
                 </div>
