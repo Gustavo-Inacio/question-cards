@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CupidCards | Conectando Corações</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter (Substitute for Airbnb Cereal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca para exportação de imagem -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <!-- Biblioteca para efeito de confete -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        rausch: '#ff385c',
+                        'rausch-active': '#e00b41',
+                        ink: '#222222',
+                        'ink-dark': '#121212',
+                        muted: '#6a6a6a',
+                        'muted-dark': '#929292',
+                        'surface-soft': '#f7f7f7',
+                        'surface-dark': '#1e1e1e',
+                        'hairline-soft': '#ebebeb',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'airbnb-sm': '8px',
+                        'airbnb-md': '14px',
+                        'airbnb-lg': '20px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-ink-dark text-ink dark:text-white font-sans antialiased transition-colors duration-300">
+
+    <!-- Botão de Alternância de Tema (Fixo) -->
+    <button id="theme-toggle" class="fixed top-6 right-6 z-[100] w-10 h-10 flex items-center justify-center bg-surface-soft dark:bg-surface-dark border border-hairline-soft dark:border-muted rounded-full shadow-sm hover:shadow-md transition-all">
+        <span id="theme-icon-light" class="hidden dark:inline text-lg">☀️</span>
+        <span id="theme-icon-dark" class="inline dark:hidden text-lg">🌙</span>
+    </button>
+
+    <main id="app">
+        <!-- screen-home: Reconstruída conforme DESIGN.md -->
+        <section id="screen-home" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 max-w-6xl mx-auto bg-white dark:bg-ink-dark">
+            
+            <!-- Header/Logo Area -->
+            <div class="mb-12 flex items-center gap-2">
+                <div class="w-8 h-8 bg-rausch rounded-airbnb-sm flex items-center justify-center text-white font-bold italic">C</div>
+                <span class="text-ink dark:text-white text-xl font-bold tracking-tight">CupidCards</span>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-ink dark:text-white text-[40px] md:text-[56px] font-bold tracking-tight leading-tight mb-6">
+                    Fortaleça sua <span class="text-rausch">Sintonia</span>
+                </h1>
+                <p class="text-muted dark:text-muted-dark text-[18px] md:text-[22px] max-w-2xl mx-auto leading-relaxed">
+                    Descubram novas camadas do relacionamento através de perguntas curadas, momentos de reflexão e uma retrospectiva única.
+                </p>
+            </div>
+
+            <!-- Feature Cards (Airbnb Style) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 w-full">
+                <div class="bg-white dark:bg-surface-dark p-8 rounded-airbnb-lg border border-hairline-soft dark:border-muted shadow-sm hover:shadow-md transition-all cursor-default">
+                    <div class="w-12 h-12 bg-surface-soft dark:bg-ink rounded-full flex items-center justify-center mb-6 text-xl">✨</div>
+                    <h3 class="text-ink dark:text-white text-[18px] font-semibold mb-3">Escolha a Vibe</h3>
+                    <p class="text-muted dark:text-muted-dark leading-relaxed text-sm">Selecione temas que variam do cotidiano leve às conversas mais profundas e íntimas.</p>
+                </div>
+
+                <div class="bg-white dark:bg-surface-dark p-8 rounded-airbnb-lg border border-hairline-soft dark:border-muted shadow-sm hover:shadow-md transition-all cursor-default">
+                    <div class="w-12 h-12 bg-surface-soft dark:bg-ink rounded-full flex items-center justify-center mb-6 text-xl">🎴</div>
+                    <h3 class="text-ink dark:text-white text-[18px] font-semibold mb-3">Revise o Baralho</h3>
+                    <p class="text-muted dark:text-muted-dark leading-relaxed text-sm">Personalize sua experiência removendo ou adicionando perguntas antes de começar a jogar.</p>
+                </div>
+
+                <div class="bg-white dark:bg-surface-dark p-8 rounded-airbnb-lg border border-hairline-soft dark:border-muted shadow-sm hover:shadow-md transition-all cursor-default">
+                    <div class="w-12 h-12 bg-surface-soft dark:bg-ink rounded-full flex items-center justify-center mb-6 text-xl">❤️</div>
+                    <h3 class="text-ink dark:text-white text-[18px] font-semibold mb-3">Retrospectiva</h3>
+                    <p class="text-muted dark:text-muted-dark leading-relaxed text-sm">Ao final, recebam um resumo visual da sua conexão para compartilhar ou guardar.</p>
+                </div>
+            </div>
+
+            <!-- CTA Button (Rausch sm/8px rounded) -->
+            <div class="flex flex-col items-center gap-4">
+                <button id="btn-start" class="bg-rausch hover:bg-rausch-active text-white text-[16px] font-semibold px-10 py-4 rounded-airbnb-sm transition-all transform active:scale-95 shadow-lg shadow-rausch/10">
+                    Montar nosso Baralho
+                </button>
+                <p class="text-muted text-[12px] uppercase tracking-widest font-bold">100% Gratuito & Privado</p>
+            </div>
+        </section>
+
+        <!-- Tarefa 1 (UI): Tela de Configuração (screen-config) -->
+        <section id="screen-config" class="hidden min-h-screen flex flex-col items-center justify-center px-6 py-12 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <!-- Botão Voltar para Home -->
+            <button id="btn-config-back" class="fixed top-6 left-6 z-[100] text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all animate-fade-in">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <div class="text-center mb-12">
+                <h2 class="text-[40px] md:text-[56px] font-bold tracking-tight leading-tight mb-4 text-ink dark:text-white">
+                    Ajuste a <span class="text-rausch">Vibe</span> do Baralho
+                </h2>
+                <p class="text-[18px] md:text-[22px] text-muted dark:text-muted-dark max-w-2xl mx-auto leading-relaxed">
+                    Use os sliders para definir a intensidade de cada categoria de perguntas.
+                </p>
+            </div>
+
+            <div class="w-full space-y-8 mb-12">
+                <!-- Slider: Divertidas -->
+                <div class="bg-white dark:bg-surface-dark p-6 rounded-airbnb-lg border border-hairline-soft dark:border-white/10 shadow-sm">
+                    <label for="slider-divertidas" class="block text-ink dark:text-white text-[18px] font-semibold mb-3">Divertidas <span id="value-divertidas" class="text-muted dark:text-muted-dark font-normal text-sm ml-2">50%</span></label>
+                    <input type="range" id="slider-divertidas" min="0" max="100" value="50" class="w-full">
+                </div>
+
+                <!-- Slider: Futuro -->
+                <div class="bg-white dark:bg-surface-dark p-6 rounded-airbnb-lg border border-hairline-soft dark:border-white/10 shadow-sm">
+                    <label for="slider-futuro" class="block text-ink dark:text-white text-[18px] font-semibold mb-3">Futuro <span id="value-futuro" class="text-muted dark:text-muted-dark font-normal text-sm ml-2">50%</span></label>
+                    <input type="range" id="slider-futuro" min="0" max="100" value="50" class="w-full">
+                </div>
+
+                <!-- Slider: Íntimas -->
+                <div class="bg-white dark:bg-surface-dark p-6 rounded-airbnb-lg border border-hairline-soft dark:border-white/10 shadow-sm">
+                    <label for="slider-intimas" class="block text-ink dark:text-white text-[18px] font-semibold mb-3">Íntimas <span id="value-intimas" class="text-muted dark:text-muted-dark font-normal text-sm ml-2">50%</span></label>
+                    <input type="range" id="slider-intimas" min="0" max="100" value="50" class="w-full">
+                </div>
+
+                <!-- Slider: Polêmicas -->
+                <div class="bg-white dark:bg-surface-dark p-6 rounded-airbnb-lg border border-hairline-soft dark:border-white/10 shadow-sm">
+                    <label for="slider-polemicas" class="block text-ink dark:text-white text-[18px] font-semibold mb-3">Polêmicas <span id="value-polemicas" class="text-muted dark:text-muted-dark font-normal text-sm ml-2">50%</span></label>
+                    <input type="range" id="slider-polemicas" min="0" max="100" value="50" class="w-full">
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full max-w-md">
+                <button id="btn-play-surprise" class="w-full bg-rausch hover:bg-rausch-active text-white text-[18px] font-semibold py-4 rounded-airbnb-md transition-all transform active:scale-95 shadow-lg shadow-rausch/10">
+                    Jogar com Surpresa! 🚀
+                </button>
+                <div class="flex flex-col md:flex-row gap-3 w-full">
+                    <button id="btn-review-auto" class="flex-1 bg-white dark:bg-surface-dark border border-hairline dark:border-muted hover:border-ink dark:hover:border-white text-ink dark:text-white text-[16px] font-semibold py-4 rounded-airbnb-md transition-all transform active:scale-95 shadow-sm">
+                        Revisar Cartas Antes de Jogar 🔍
+                    </button>
+                    <button id="btn-manual-empty" class="flex-1 bg-surface-soft dark:bg-ink hover:bg-hairline-soft dark:hover:bg-muted text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white text-[14px] font-medium py-4 rounded-airbnb-md transition-all transform active:scale-95">
+                        Criar Perguntas Manualmente
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tarefa 1 & 2: Tela de Revisão (screen-review) -->
+        <section id="screen-review" class="hidden min-h-screen flex flex-col items-center px-6 pt-16 pb-32 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <!-- Botão Voltar para Config -->
+            <button id="btn-review-back" class="fixed top-6 left-6 z-[100] text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all animate-fade-in">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <div class="text-center mb-10">
+                <h2 class="text-[32px] md:text-[40px] font-bold tracking-tight text-ink dark:text-white">Quase pronto!</h2>
+                <p class="text-muted dark:text-muted-dark mt-2 text-[18px] mb-6">Revise e personalize a seleção final.</p>
+                <button id="btn-regenerate-review" class="inline-flex items-center gap-2 text-rausch hover:text-rausch-active transition-all font-semibold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Gerar novas perguntas
+                </button>
+            </div>
+
+            <!-- Container da Lista de Perguntas -->
+            <div id="deck-list" class="w-full space-y-3 mb-8">
+                <!-- Renderizado via JS -->
+            </div>
+
+            <!-- Tarefa 2: Adição Manual -->
+            <div class="w-full flex gap-3 p-4 bg-surface-soft dark:bg-surface-dark rounded-airbnb-lg border border-dashed border-hairline-soft dark:border-white/20">
+                <input type="text" id="input-custom-question" placeholder="Adicione sua própria pergunta..." 
+                    class="flex-1 bg-transparent border-none focus:ring-0 text-ink dark:text-white placeholder-muted dark:placeholder-muted-dark outline-none">
+                <button id="btn-add-custom" class="bg-ink text-white w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 transition-all shadow-sm">
+                    <span class="text-xl font-light">+</span>
+                </button>
+            </div>
+
+            <!-- Tarefa 4: Botão Fixo no Rodapé -->
+            <div class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-ink-dark/80 backdrop-blur-md border-t border-hairline-soft dark:border-white/10 p-6 flex justify-center z-50">
+                <button id="btn-go-to-game" class="w-full max-w-md bg-rausch hover:bg-rausch-active text-white text-[18px] font-semibold py-4 rounded-airbnb-md shadow-lg shadow-rausch/20 transition-all transform active:scale-95">
+                    Começar o Jogo (<span id="deck-count">0</span> cartas)
+                </button>
+            </div>
+        </section>
+
+        <!-- Tarefa 1, 2 & 3: Tela Principal do Jogo (screen-game) -->
+        <section id="screen-game" class="hidden min-h-screen flex flex-col items-center justify-between px-6 py-4 md:py-10 max-w-4xl mx-auto overflow-hidden bg-white dark:bg-ink-dark">
+            <!-- Barra de Navegação do Jogo -->
+            <div class="w-full flex justify-between items-center max-w-xl z-10">
+                <button id="btn-game-back-config" class="fixed top-6 left-6 z-[100] text-xs font-bold uppercase tracking-widest text-muted dark:text-muted-dark hover:text-rausch transition-all flex items-center gap-1 animate-fade-in">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Configurar
+                </button>
+                <button id="btn-game-prev" class="fixed top-6 right-20 z-[100] text-xs font-bold uppercase tracking-widest text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed animate-fade-in">
+                    ← Anterior
+                </button>
+            </div>
+
+            <!-- Tarefa 1: Ad Slot Top -->
+            <div class="ad-placeholder w-full max-w-xl h-16 md:h-24 bg-surface-soft dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-md flex items-center justify-center text-muted dark:text-muted-dark text-xs md:text-sm italic">
+                Espaço do Anúncio
+            </div>
+
+            <!-- Tarefa 2: O Card -->
+            <div id="game-card-container" class="flex-1 flex flex-col items-center justify-center w-full max-w-md transition-all duration-300">
+                <div class="bg-white dark:bg-surface-dark w-full aspect-[3/4] p-6 md:p-10 rounded-airbnb-lg shadow-lg border border-hairline-soft dark:border-white/10 flex flex-col items-center justify-center text-center relative transform transition-transform hover:scale-[1.02]">
+                    <span id="game-card-category" class="absolute top-10 text-[10px] font-bold uppercase tracking-[0.2em] text-muted dark:text-muted-dark">Categoria</span>
+                    <p id="game-card-text" class="text-[24px] md:text-[28px] font-semibold text-ink dark:text-white leading-relaxed">
+                        Carregando pergunta...
+                    </p>
+                </div>
+
+                <!-- Tarefa 3: Botões de Interação -->
+                <div class="grid grid-cols-2 gap-4 w-full mt-6 md:mt-10">
+                    <button id="btn-disagree" class="bg-surface-soft hover:bg-hairline-soft text-ink text-[16px] font-semibold py-5 rounded-airbnb-md transition-all transform active:scale-95">
+                        Discordamos
+                    </button>
+                    <button id="btn-agree" class="bg-[#d1fae5] dark:bg-[#065f46]/20 hover:bg-[#bbf7d0] dark:hover:bg-[#065f46]/40 text-[#065f46] dark:text-[#d1fae5] text-[16px] font-semibold py-5 rounded-airbnb-md transition-all transform active:scale-95">
+                        Concordamos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tarefa 1: Ad Slot Bottom -->
+            <div class="ad-placeholder w-full max-w-xl h-16 md:h-24 bg-surface-soft dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-md flex items-center justify-center text-muted dark:text-muted-dark text-xs md:text-sm italic mt-6 md:mt-10">
+                Espaço do Anúncio
+            </div>
+        </section>
+
+        <!-- Tarefa 2 & 3: Tela de Histórico (screen-history) -->
+        <section id="screen-history" class="hidden min-h-screen flex flex-col items-center px-6 py-10 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <!-- Botão Voltar para Resumo -->
+            <button id="btn-history-back" class="fixed top-6 left-6 z-[100] text-muted dark:text-muted-dark hover:text-ink dark:hover:text-white transition-all animate-fade-in">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <div class="text-center mb-10">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-muted dark:text-muted-dark">Recapitulação</span>
+                <h2 class="text-[32px] md:text-[40px] font-bold text-ink dark:text-white mt-2">Nossas Respostas</h2>
+                <p class="text-muted dark:text-muted-dark mt-2">Veja os detalhes da nossa conexão nesta rodada.</p>
+            </div>
+
+            <!-- Feed de Cards (Minimalista) -->
+            <div id="history-feed" class="w-full space-y-3 mb-12">
+                <!-- Renderizado via JS -->
+            </div>
+
+            <!-- Ação Final -->
+            <button id="btn-go-to-result" class="w-full max-w-md bg-ink text-white text-[18px] font-semibold py-5 rounded-airbnb-md shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                Ver Nossa Retrospectiva Completa ➔
+            </button>
+        </section>
+
+        <!-- Tarefa 1 & 2: Tela de Resultados (screen-result) -->
+        <section id="screen-result" class="hidden min-h-screen flex flex-col items-center px-6 py-8 md:py-16 max-w-4xl mx-auto bg-white dark:bg-ink-dark">
+            <div class="text-center mb-6 md:mb-10">
+                <div class="w-12 h-12 md:w-16 md:h-16 bg-surface-soft dark:bg-surface-dark rounded-full flex items-center justify-center text-xl md:text-2xl mx-auto mb-4 md:mb-6">✨</div>
+                <h2 id="result-title" class="text-[28px] md:text-[40px] font-bold text-ink dark:text-white mb-2 md:mb-4 leading-tight">Calculando sintonia...</h2>
+                
+                <!-- Tarefa 1: Painel de Personalização -->
+                <div class="w-full max-w-md mx-auto mb-6 md:mb-10 space-y-4 md:space-y-6">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-3">
+                        <input type="text" id="input-name1" placeholder="Seu Nome" 
+                            class="flex-1 p-3 bg-white dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-sm outline-none focus:border-rausch transition-all text-sm dark:text-white">
+                        <input type="text" id="input-name2" placeholder="Nome do Mozão" 
+                            class="flex-1 p-3 bg-white dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-sm outline-none focus:border-rausch transition-all text-sm dark:text-white">
+                    </div>
+                    
+                    <div class="flex justify-center gap-4">
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-rausch to-plus border-2 border-white ring-2 ring-transparent active:ring-ink transition-all" 
+                            data-gradient="from-rausch to-plus"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-rose-400 to-rose-600"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-purple-500 to-indigo-600"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-rose-500 border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-orange-400 to-rose-500"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-gray-800 to-black border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-gray-800 to-black"></button>
+                    </div>
+                </div>
+
+                <!-- Resumo Visual original (oculto ou mantido como backup) -->
+                <div class="hidden w-full max-w-md mx-auto bg-surface-soft h-4 rounded-full overflow-hidden flex mb-4">
+                    <div id="bar-agree" class="bg-[#d1fae5] h-full transition-all duration-1000"></div>
+                    <div id="bar-disagree" class="bg-hairline-soft h-full transition-all duration-1000"></div>
+                </div>
+
+                <div class="flex justify-between text-xs md:text-sm font-medium text-muted dark:text-muted-dark max-w-md mx-auto px-1">
+                    <span>Concordamos: <span id="count-agree" class="text-[#065f46] dark:text-[#d1fae5]">0</span></span>
+                    <span>Discordamos: <span id="count-disagree" class="text-[#065f46] dark:text-[#d1fae5]">0</span></span>
+                </div>
+            </div>
+
+            <!-- Tarefa 2: Card de Compartilhamento Refinado -->
+            <div class="relative mb-12">
+                <div id="shareable-card" class="w-[320px] aspect-[9/16] bg-gradient-to-br from-rausch to-plus p-8 flex flex-col items-center justify-between text-white text-center rounded-airbnb-lg shadow-2xl overflow-hidden">
+                    <div class="w-full">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80">CupidCards</span>
+                        <h4 id="display-names" class="text-lg font-bold mt-2 truncate">Você & Seu Par</h4>
+                        <div class="mt-6">
+                            <p class="text-[10px] uppercase tracking-widest opacity-80">Sintonia Geral</p>
+                            <h3 id="display-overall-score" class="text-[56px] font-bold leading-none">0%</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Score por Categoria -->
+                    <div id="display-category-list" class="w-full space-y-4 px-2">
+                        <!-- Gerado via JS -->
+                    </div>
+
+                    <div class="w-full">
+                        <p class="text-[10px] opacity-90 italic">"Conectados através de cada pergunta."</p>
+                        <p class="text-[11px] font-bold tracking-wide mt-4">Façam o teste em cupidcards.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4 w-full max-w-xs">
+                <!-- Novo Botão: Verificar Perguntas -->
+                <button id="btn-back-to-history" class="w-full bg-white dark:bg-surface-dark border border-hairline dark:border-white/10 hover:border-ink dark:hover:border-white text-ink dark:text-white text-[16px] font-semibold py-4 rounded-airbnb-md transition-all transform active:scale-95 shadow-sm flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    Verificar perguntas
+                </button>
+
+                <button id="btn-share-result" class="bg-rausch hover:bg-rausch-active text-white px-8 py-4 rounded-airbnb-md font-semibold transition-all shadow-lg flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    Compartilhar Resultado
+                </button>
+                <button onclick="location.reload()" class="text-muted hover:text-ink font-medium transition-all text-sm">
+                    Jogar Novamente
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

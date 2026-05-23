@@ -1,0 +1,40 @@
+{
+    "Divertidas": [
+        { "id": 1, "text": "Qual foi a coisa mais engraçada que você já fez por amor?" },
+        { "id": 2, "text": "Se pudéssemos ter um superpoder juntos, qual seria e como o usaríamos?" },
+        { "id": 3, "text": "Qual é a sua lembrança mais embaraçosa da nossa relação?" },
+        { "id": 4, "text": "Se fôssemos personagens de desenho animado, quais seríamos?" },
+        { "id": 5, "text": "Qual é a sua 'guilty pleasure' que você não me contou ainda?" },
+        { "id": 6, "text": "Qual é a coisa mais aleatória que te faz rir?" },
+        { "id": 7, "text": "Se pudéssemos trocar de corpo por um dia, o que você faria?" },
+        { "id": 8, "text": "Qual é a sua melhor imitação de alguém?" }
+    ],
+    "Futuro": [
+        { "id": 9, "text": "Onde você se vê daqui a 5 anos, e como eu me encaixo nisso?" },
+        { "id": 10, "text": "Qual é um sonho ou objetivo que você tem para nós como casal?" },
+        { "id": 11, "text": "Se pudéssemos viajar para qualquer lugar no futuro, para onde iríamos?" },
+        { "id": 12, "text": "Qual é a maior aventura que você gostaria de viver comigo?" },
+        { "id": 13, "text": "Que tipo de legado você gostaria que deixássemos juntos?" },
+        { "id": 14, "text": "Qual é uma nova habilidade que você gostaria que aprendêssemos juntos?" },
+        { "id": 15, "text": "Como você imagina nossa rotina ideal em um futuro distante?" }
+    ],
+    "Íntimas": [
+        { "id": 16, "text": "Qual é a coisa que você mais admira em mim e que talvez eu não saiba?" },
+        { "id": 17, "text": "Qual foi o momento em que você sentiu que realmente me conhecia?" },
+        { "id": 18, "text": "O que te faz sentir mais amado(a) e seguro(a) em nosso relacionamento?" },
+        { "id": 19, "text": "Qual é a sua linguagem do amor principal e como posso expressá-la melhor?" },
+        { "id": 20, "text": "Qual é um medo ou insegurança que você tem e que eu posso ajudar a aliviar?" },
+        { "id": 21, "text": "Qual é a sua fantasia mais secreta que você gostaria de compartilhar?" },
+        { "id": 22, "text": "O que você mais valoriza em nossa conexão emocional?" },
+        { "id": 23, "text": "Qual é a coisa mais vulnerável que você já me contou?" }
+    ],
+    "Polêmicas": [
+        { "id": 24, "text": "Qual é uma opinião impopular que você tem sobre relacionamentos?" },
+        { "id": 25, "text": "Se tivéssemos uma grande discussão, qual seria o motivo mais provável?" },
+        { "id": 26, "text": "Qual é a coisa mais difícil que você já teve que me perdoar?" },
+        { "id": 27, "text": "Existe algo que você gostaria de mudar em nosso relacionamento, mas tem receio de falar?" },
+        { "id": 28, "text": "Qual é o maior desafio que enfrentamos ou podemos enfrentar como casal?" },
+        { "id": 29, "text": "Se você pudesse mudar uma coisa no seu passado antes de me conhecer, o que seria?" },
+        { "id": 30, "text": "Qual é o limite que você nunca cruzaria em um relacionamento?" }
+    ]
+}
