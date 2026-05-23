@@ -2,6 +2,12 @@
 body {
     background-color: #ffffff;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* Modo Escuro */
+.dark body {
+    background-color: #121212;
 }
 
 /* Implementando a única tier de sombra do DESIGN.md */
@@ -27,6 +33,10 @@ input[type="range"] {
     border-radius: 9999px; /* Full rounded track */
     outline: none;
     transition: opacity .2s;
+}
+
+.dark input[type="range"] {
+    background: #333333;
 }
 
 /* Thumb styling for Webkit browsers */

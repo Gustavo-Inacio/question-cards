@@ -48,6 +48,34 @@ let gameResults = []; // Registro das respostas (Concordamos/Discordamos)
 const TOTAL_QUESTIONS_IN_DECK = 15;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Lógica de Modo Escuro
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    // Inicializa o tema baseado no localStorage ou preferência do sistema
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+    } else {
+        htmlElement.classList.remove('dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+            htmlElement.classList.remove('dark');
+            localStorage.theme = 'light';
+        } else {
+            htmlElement.classList.add('dark');
+            localStorage.theme = 'dark';
+        }
+    });
+
+    // Listener para mudanças no sistema
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.theme) {
+            e.matches ? htmlElement.classList.add('dark') : htmlElement.classList.remove('dark');
+        }
+    });
+
     const btnStart = document.getElementById('btn-start');
     const btnPlaySurprise = document.getElementById('btn-play-surprise');
     const btnReviewAuto = document.getElementById('btn-review-auto');
@@ -144,12 +172,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const icon = isAgree ? "🤝 Concordaram" : "🤷‍♂️ Divergente";
 
-            card.className = `p-4 rounded-airbnb-md border border-hairline-soft ${statusClass} transition-all`;
+            card.className = `p-4 rounded-airbnb-md border border-hairline-soft dark:border-white/10 ${statusClass} transition-all dark:bg-surface-dark`;
             card.innerHTML = `
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
                     <div class="flex flex-col">
-                        <span class="text-[9px] font-bold uppercase tracking-widest text-muted mb-1">${result.question.category || 'Personalizada'}</span>
-                        <p class="text-ink font-medium text-[15px] leading-tight">${result.question.text}</p>
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-muted dark:text-muted-dark mb-1">${result.question.category || 'Personalizada'}</span>
+                        <p class="text-ink dark:text-white font-medium text-[15px] leading-tight">${result.question.text}</p>
                     </div>
                     <span class="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-bold whitespace-nowrap self-start md:self-center ${badgeClass}">
                         ${icon}
@@ -161,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Tarefa 3: Inserção de Ad Placeholder a cada 4 itens
             if ((index + 1) % 4 === 0 && index !== gameResults.length - 1) {
                 const ad = document.createElement('div');
-                ad.className = "ad-placeholder-feed w-full h-32 bg-surface-soft border border-dashed border-hairline-soft rounded-airbnb-md flex items-center justify-center text-muted text-xs italic";
+                ad.className = "ad-placeholder-feed w-full h-32 bg-surface-soft dark:bg-ink border border-dashed border-hairline-soft dark:border-muted rounded-airbnb-md flex items-center justify-center text-muted dark:text-muted-dark text-xs italic";
                 ad.textContent = "Sugestão para o Casal (Anúncio)";
                 feed.appendChild(ad);
             }
@@ -349,11 +377,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentDeck.forEach((question, index) => {
             const card = document.createElement('div');
-            card.className = "flex items-center justify-between p-5 bg-white border border-hairline-soft rounded-airbnb-md shadow-sm hover:border-hairline transition-all group";
+            card.className = "flex items-center justify-between p-5 bg-white dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-md shadow-sm hover:border-hairline dark:hover:border-white transition-all group";
             
             card.innerHTML = `
-                <p class="text-ink text-[16px] leading-relaxed pr-4 font-medium">${question.text}</p>
-                <button onclick="removeQuestion(${index})" class="text-muted hover:text-rausch p-2 rounded-full hover:bg-red-50 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100">
+                <p class="text-ink dark:text-white text-[16px] leading-relaxed pr-4 font-medium">${question.text}</p>
+                <button onclick="removeQuestion(${index})" class="text-muted dark:text-muted-dark hover:text-rausch p-2 rounded-full hover:bg-red-50 dark:hover:bg-white/10 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
