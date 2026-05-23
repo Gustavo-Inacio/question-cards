@@ -324,11 +324,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.appendChild(ins);
 
             // 3. Força o Google a carregar um novo anúncio para este slot específico
-            try {
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (e) {
-                console.error(`Erro ao carregar AdSense em ${id}:`, e);
-            }
+            setTimeout(() => {
+                try {
+                    // Verifica se o container realmente ganhou tamanho antes de disparar
+                    if (container.offsetWidth > 0) {
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    } else {
+                        console.warn(`AdSense ignorado em ${id}: container ainda está invisível (width=0).`);
+                    }
+                } catch (e) {
+                    console.error(`Erro ao carregar AdSense em ${id}:`, e);
+                }
+            }, 120); // 50ms é imperceptível para o usuário, mas uma eternidade para o navegador
         });
     };
 
