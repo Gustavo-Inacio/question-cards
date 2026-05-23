@@ -49,8 +49,9 @@ const TOTAL_QUESTIONS_IN_DECK = 15;
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnStart = document.getElementById('btn-start');
-    const btnGenerateDeck = document.getElementById('btn-generate-deck');
-    const btnManualDeck = document.getElementById('btn-manual-deck');
+    const btnPlaySurprise = document.getElementById('btn-play-surprise');
+    const btnReviewAuto = document.getElementById('btn-review-auto');
+    const btnManualEmpty = document.getElementById('btn-manual-empty');
 
     const screenHome = document.getElementById('screen-home');
     const screenConfig = document.getElementById('screen-config');
@@ -102,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const goToGame = () => {
         currentIndex = 0;
         gameResults = [];
+        screenConfig.classList.add('hidden');
         screenReview.classList.add('hidden');
         screenGame.classList.remove('hidden');
         renderGameCard();
@@ -309,14 +311,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentDeck.length > 0) goToGame();
         else alert("Adicione pelo menos uma carta para jogar!");
     });
-
-    document.getElementById('btn-disagree').addEventListener('click', () => handleResponse('Discordamos'));
-    document.getElementById('btn-agree').addEventListener('click', () => handleResponse('Concordamos'));
     
-    document.getElementById('btn-share-result').addEventListener('click', shareResult);
+    // Tarefa 3: Controle de Rotas e Lógica de Ramificação
+    btnPlaySurprise.addEventListener('click', () => {
+        gerarBaralho();
+        goToGame();
+    });
 
-    // Tarefa 3 (Lógica): Gerar Baralho Automático
-    btnGenerateDeck.addEventListener('click', () => {
+    btnReviewAuto.addEventListener('click', () => {
+        gerarBaralho();
+        goToReview();
+    });
+
+    btnManualEmpty.addEventListener('click', () => {
+        currentDeck = [];
+        goToReview();
+    });
+
+    // Tarefa 2: Função Gerar Baralho baseada nos Sliders
+    const gerarBaralho = () => {
         const sliderValues = {
             "Divertidas": parseInt(sliders.divertidas.value),
             "Futuro": parseInt(sliders.futuro.value),
@@ -393,15 +406,13 @@ document.addEventListener('DOMContentLoaded', () => {
         while (currentDeck.length > TOTAL_QUESTIONS_IN_DECK) {
             currentDeck.pop();
         }
+        
+        // Embaralha o resultado final para misturar as categorias
+        shuffleArray(currentDeck);
+    };
 
-        console.log("Baralho Gerado:", currentDeck);
-        console.log("Total de Perguntas:", currentDeck.length);
-
-        goToReview();
-    });
-
-    btnManualDeck.addEventListener('click', () => {
-        alert('A funcionalidade de montagem manual será implementada em breve!');
-        // Poderia navegar para uma tela de seleção manual de perguntas
-    });
+    document.getElementById('btn-disagree').addEventListener('click', () => handleResponse('Discordamos'));
+    document.getElementById('btn-agree').addEventListener('click', () => handleResponse('Concordamos'));
+    
+    document.getElementById('btn-share-result').addEventListener('click', shareResult);
 });
