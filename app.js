@@ -112,24 +112,76 @@ document.addEventListener('DOMContentLoaded', () => {
         screenResult.classList.remove('hidden');
         renderResultScreen();
     };
+    
+    // Tarefa 1: Personalização em Tempo Real
+    const inputName1 = document.getElementById('input-name1');
+    const inputName2 = document.getElementById('input-name2');
+    const displayNames = document.getElementById('display-names');
+    const shareableCard = document.getElementById('shareable-card');
 
-    // Tarefa 1 & 3: Lógica de Resultados e Exportação
+    const updateNames = () => {
+        const n1 = inputName1.value.trim() || "Você";
+        const n2 = inputName2.value.trim() || "Seu Par";
+        displayNames.textContent = `${n1} & ${n2}`;
+    };
+
+    inputName1.addEventListener('input', updateNames);
+    inputName2.addEventListener('input', updateNames);
+
+    document.querySelectorAll('.btn-color-pick').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove gradients anteriores
+            shareableCard.className = shareableCard.className.replace(/from-\S+ to-\S+/g, '');
+            shareableCard.classList.add(...btn.dataset.gradient.split(' '));
+            
+            // Estilo visual do botão selecionado
+            document.querySelectorAll('.btn-color-pick').forEach(b => b.classList.remove('ring-ink'));
+            btn.classList.add('ring-ink');
+        });
+    });
+
+    // Tarefa 2: Refinamento do Score
     const renderResultScreen = () => {
         const agreeCount = gameResults.filter(r => r.response === 'Concordamos').length;
         const disagreeCount = gameResults.filter(r => r.response === 'Discordamos').length;
         const total = gameResults.length;
         
-        const agreePercent = (agreeCount / total) * 100;
-        const disagreePercent = (disagreeCount / total) * 100;
+        const overallScore = Math.round((agreeCount / total) * 100);
 
         // Update UI
         document.getElementById('count-agree').textContent = agreeCount;
         document.getElementById('count-disagree').textContent = disagreeCount;
-        document.getElementById('bar-agree').style.width = `${agreePercent}%`;
-        document.getElementById('bar-disagree').style.width = `${disagreePercent}%`;
+        document.getElementById('display-overall-score').textContent = `${overallScore}%`;
+
+        // Score por Categoria
+        const catStats = {};
+        gameResults.forEach(res => {
+            const cat = res.question.category || "Personalizada";
+            if (!catStats[cat]) catStats[cat] = { agree: 0, total: 0 };
+            catStats[cat].total++;
+            if (res.response === 'Concordamos') catStats[cat].agree++;
+        });
+
+        const listContainer = document.getElementById('display-category-list');
+        listContainer.innerHTML = '';
+        
+        Object.entries(catStats).forEach(([name, stat]) => {
+            const percent = Math.round((stat.agree / stat.total) * 100);
+            const item = document.createElement('div');
+            item.className = "text-left";
+            item.innerHTML = `
+                <div class="flex justify-between text-[10px] uppercase font-bold mb-1 opacity-80">
+                    <span>${name}</span>
+                    <span>${stat.agree}/${stat.total}</span>
+                </div>
+                <div class="w-full bg-white/20 h-1 rounded-full overflow-hidden">
+                    <div class="bg-white h-full" style="width: ${percent}%"></div>
+                </div>
+            `;
+            listContainer.appendChild(item);
+        });
 
         const titleElement = document.getElementById('result-title');
-        const cardTitleElement = document.getElementById('card-result-title');
         
         if (agreeCount > disagreeCount) {
             titleElement.textContent = "Sintonia Perfeita! ❤️";
@@ -140,14 +192,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const downloadShareableCard = () => {
-        const card = document.getElementById('shareable-card');
-        html2canvas(card, { scale: 2 }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'cupidcards-nosso-momento.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        });
+    // Tarefa 4: Web Share API e Fallback
+    const shareResult = async () => {
+        const btn = document.getElementById('btn-share-result');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "Processando...";
+
+        try {
+            const canvas = await html2canvas(shareableCard, { scale: 2, useCORS: true });
+            const dataUrl = canvas.toDataURL('image/png');
+            const blob = await (await fetch(dataUrl)).blob();
+            const file = new File([blob], 'cupidcards-result.png', { type: 'image/png' });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: 'Nosso Raio-X de Casal!',
+                    text: 'Veja nossa sintonia no CupidCards!',
+                    url: window.location.href,
+                    files: [file]
+                });
+            } else {
+                // Fallback para Desktop
+                const link = document.createElement('a');
+                link.download = 'cupidcards-result.png';
+                link.href = dataUrl;
+                link.click();
+                navigator.clipboard.writeText(window.location.href);
+                alert('Imagem baixada e link copiado para a área de transferência! ✨');
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            btn.innerHTML = originalText;
+        }
     };
 
     // Tarefa 1 & 4: Lógica do Jogo
@@ -236,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-disagree').addEventListener('click', () => handleResponse('Discordamos'));
     document.getElementById('btn-agree').addEventListener('click', () => handleResponse('Concordamos'));
     
-    document.getElementById('btn-download-card').addEventListener('click', downloadShareableCard);
+    document.getElementById('btn-share-result').addEventListener('click', shareResult);
 
     // Tarefa 3 (Lógica): Gerar Baralho Automático
     btnGenerateDeck.addEventListener('click', () => {

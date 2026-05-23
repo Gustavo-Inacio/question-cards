@@ -196,39 +196,71 @@
                 <div class="w-16 h-16 bg-surface-soft rounded-full flex items-center justify-center text-2xl mx-auto mb-6">✨</div>
                 <h2 id="result-title" class="text-[32px] md:text-[40px] font-bold text-ink mb-4 leading-tight">Calculando sintonia...</h2>
                 
-                <!-- Tarefa 1: Resumo Visual -->
-                <div class="w-full max-w-md mx-auto bg-surface-soft h-4 rounded-full overflow-hidden flex mb-4">
-                    <div id="bar-agree" class="bg-[#d1fae5] h-full transition-all duration-1000" style="width: 0%"></div>
-                    <div id="bar-disagree" class="bg-hairline-soft h-full transition-all duration-1000" style="width: 0%"></div>
+                <!-- Tarefa 1: Painel de Personalização -->
+                <div class="w-full max-w-md mx-auto mb-10 space-y-6">
+                    <div class="flex gap-3">
+                        <input type="text" id="input-name1" placeholder="Seu Nome" 
+                            class="flex-1 p-3 border border-hairline-soft rounded-airbnb-sm outline-none focus:border-rausch transition-all text-sm">
+                        <input type="text" id="input-name2" placeholder="Nome do Mozão" 
+                            class="flex-1 p-3 border border-hairline-soft rounded-airbnb-sm outline-none focus:border-rausch transition-all text-sm">
+                    </div>
+                    
+                    <div class="flex justify-center gap-4">
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-rausch to-plus border-2 border-white ring-2 ring-transparent active:ring-ink transition-all" 
+                            data-gradient="from-rausch to-plus"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-rose-400 to-rose-600"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-purple-500 to-indigo-600"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-rose-500 border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-orange-400 to-rose-500"></button>
+                        <button class="btn-color-pick w-8 h-8 rounded-full bg-gradient-to-br from-gray-800 to-black border-2 border-white ring-2 ring-transparent transition-all" 
+                            data-gradient="from-gray-800 to-black"></button>
+                    </div>
                 </div>
+
+                <!-- Resumo Visual original (oculto ou mantido como backup) -->
+                <div class="hidden w-full max-w-md mx-auto bg-surface-soft h-4 rounded-full overflow-hidden flex mb-4">
+                    <div id="bar-agree" class="bg-[#d1fae5] h-full transition-all duration-1000"></div>
+                    <div id="bar-disagree" class="bg-hairline-soft h-full transition-all duration-1000"></div>
+                </div>
+
                 <div class="flex justify-between text-sm font-medium text-muted max-w-md mx-auto px-1">
                     <span>Concordamos: <span id="count-agree" class="text-[#065f46]">0</span></span>
                     <span>Discordamos: <span id="count-disagree" class="text-ink">0</span></span>
                 </div>
             </div>
 
-            <!-- Tarefa 2: O Card Compartilhável (Hidden from normal flow but ready for capture) -->
-            <div class="relative group mb-12">
-                <div id="shareable-card" class="w-[320px] aspect-[9/16] bg-gradient-to-br from-rausch to-plus p-8 flex flex-col items-center justify-between text-white text-center rounded-airbnb-lg shadow-xl overflow-hidden">
-                    <div class="mt-8">
+            <!-- Tarefa 2: Card de Compartilhamento Refinado -->
+            <div class="relative mb-12">
+                <div id="shareable-card" class="w-[320px] aspect-[9/16] bg-gradient-to-br from-rausch to-plus p-8 flex flex-col items-center justify-between text-white text-center rounded-airbnb-lg shadow-2xl overflow-hidden">
+                    <div class="w-full">
                         <span class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80">CupidCards</span>
-                        <h3 id="card-result-title" class="text-[28px] font-bold mt-4 leading-tight px-4">Sintonia Perfeita</h3>
+                        <h4 id="display-names" class="text-lg font-bold mt-2 truncate">Você & Seu Par</h4>
+                        <div class="mt-6">
+                            <p class="text-[10px] uppercase tracking-widest opacity-80">Sintonia Geral</p>
+                            <h3 id="display-overall-score" class="text-[56px] font-bold leading-none">0%</h3>
+                        </div>
                     </div>
                     
-                    <div class="flex flex-col items-center">
-                        <div class="text-[64px] mb-2">❤️</div>
-                        <p class="text-[14px] opacity-90 px-6 italic">"Onde há diálogo, há conexão."</p>
+                    <!-- Score por Categoria -->
+                    <div id="display-category-list" class="w-full space-y-4 px-2">
+                        <!-- Gerado via JS -->
                     </div>
 
-                    <div class="mb-8">
-                        <p class="text-[12px] font-medium tracking-wide">Jogue em cupidcards.app</p>
+                    <div class="w-full">
+                        <p class="text-[10px] opacity-90 italic">"Conectados através de cada pergunta."</p>
+                        <p class="text-[11px] font-bold tracking-wide mt-4">Façam o teste em cupidcards.com</p>
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col gap-4 w-full max-w-xs">
-                <button id="btn-download-card" class="bg-ink text-white px-8 py-4 rounded-airbnb-sm font-semibold hover:bg-black transition-all shadow-sm">
-                    Baixar Card para Stories
+                <button id="btn-share-result" class="bg-rausch hover:bg-rausch-active text-white px-8 py-4 rounded-airbnb-md font-semibold transition-all shadow-lg flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    Compartilhar Resultado
                 </button>
                 <button onclick="location.reload()" class="text-muted hover:text-ink font-medium transition-all text-sm">
                     Jogar Novamente
