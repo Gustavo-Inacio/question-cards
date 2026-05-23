@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         screenReview.classList.add('hidden');
         screenGame.classList.remove('hidden');
         renderGameCard();
+        reloadAds(); // Carrega os anúncios para a primeira pergunta
     };
 
     const goToHistory = () => {
@@ -301,8 +302,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Tarefa 1 & 4: Lógica do Jogo
     const reloadAds = () => {
-        // Função reservada para futura integração com AdSense/IMA
-        console.log("Ad Slots reloaded for card index:", currentIndex);
+        const containers = ['espaco-anuncio', 'espaco-anuncio-bottom'];
+
+        containers.forEach(id => {
+            const container = document.getElementById(id);
+            if (!container) return;
+
+            // 1. Limpa o conteúdo interno
+            container.innerHTML = '';
+            container.classList.remove('italic'); // Remove o estilo de placeholder se houver
+
+            // 2. Reinjeta dinamicamente o elemento ins
+            const ins = document.createElement('ins');
+            ins.className = 'adsbygoogle';
+            ins.style.display = 'block';
+            ins.setAttribute('data-ad-client', 'ca-pub-4931701600814773');
+            ins.setAttribute('data-ad-slot', '9139439672');
+            ins.setAttribute('data-ad-format', 'auto');
+            ins.setAttribute('data-full-width-responsive', 'true');
+
+            container.appendChild(ins);
+
+            // 3. Força o Google a carregar um novo anúncio para este slot específico
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.error(`Erro ao carregar AdSense em ${id}:`, e);
+            }
+        });
     };
 
     const renderGameCard = () => {
