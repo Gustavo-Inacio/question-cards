@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const screenConfig = document.getElementById('screen-config');
     const screenReview = document.getElementById('screen-review');
     const screenGame = document.getElementById('screen-game');
+    const screenHistory = document.getElementById('screen-history');
     const screenResult = document.getElementById('screen-result');
     const deckList = document.getElementById('deck-list');
     const gameCardContainer = document.getElementById('game-card-container');
@@ -109,12 +110,65 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGameCard();
     };
 
+    const goToHistory = () => {
+        screenGame.classList.add('hidden');
+        screenResult.classList.add('hidden');
+        screenHistory.classList.remove('hidden');
+        renderHistoryScreen();
+    };
+
     const goToResult = () => {
         screenGame.classList.add('hidden');
+        screenHistory.classList.add('hidden');
         screenResult.classList.remove('hidden');
         renderResultScreen();
     };
     
+    // Tarefa 2 & 3: Renderização do Feed de Histórico
+    const renderHistoryScreen = () => {
+        const feed = document.getElementById('history-feed');
+        feed.innerHTML = '';
+
+        gameResults.forEach((result, index) => {
+            const isAgree = result.response === 'Concordamos';
+            const card = document.createElement('div');
+            
+            // Estilo do Card baseado na escolha
+            const statusClass = isAgree 
+                ? "border-l-4 border-[#d1fae5] bg-white" 
+                : "border-l-4 border-[#fee2e2] bg-white";
+            
+            const badgeClass = isAgree 
+                ? "bg-[#d1fae5] text-[#065f46]" 
+                : "bg-[#fee2e2] text-[#991b1b]";
+
+            const icon = isAgree ? "🤝 Concordaram" : "🤷‍♂️ Divergente";
+
+            card.className = `p-4 rounded-airbnb-md border border-hairline-soft ${statusClass} transition-all`;
+            card.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                    <div class="flex flex-col">
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-muted mb-1">${result.question.category || 'Personalizada'}</span>
+                        <p class="text-ink font-medium text-[15px] leading-tight">${result.question.text}</p>
+                    </div>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-bold whitespace-nowrap self-start md:self-center ${badgeClass}">
+                        ${icon}
+                    </span>
+                </div>
+            `;
+            feed.appendChild(card);
+
+            // Tarefa 3: Inserção de Ad Placeholder a cada 4 itens
+            if ((index + 1) % 4 === 0 && index !== gameResults.length - 1) {
+                const ad = document.createElement('div');
+                ad.className = "ad-placeholder-feed w-full h-32 bg-surface-soft border border-dashed border-hairline-soft rounded-airbnb-md flex items-center justify-center text-muted text-xs italic";
+                ad.textContent = "Sugestão para o Casal (Anúncio)";
+                feed.appendChild(ad);
+            }
+        });
+        window.scrollTo(0, 0);
+    };
+
     // Tarefa 1: Personalização em Tempo Real
     const inputName1 = document.getElementById('input-name1');
     const inputName2 = document.getElementById('input-name2');
@@ -187,10 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (agreeCount > disagreeCount) {
             titleElement.textContent = "Sintonia Perfeita! ❤️";
-            cardTitleElement.textContent = "Sintonia Perfeita";
         } else {
             titleElement.textContent = "Vocês são o Caos! 🔥";
-            cardTitleElement.textContent = "Conexão no Caos";
         }
     };
 
@@ -311,6 +363,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentDeck.length > 0) goToGame();
         else alert("Adicione pelo menos uma carta para jogar!");
     });
+
+    document.getElementById('btn-go-to-result').addEventListener('click', goToResult);
+
+    document.getElementById('btn-back-to-history').addEventListener('click', goToHistory);
     
     // Tarefa 3: Controle de Rotas e Lógica de Ramificação
     btnPlaySurprise.addEventListener('click', () => {
