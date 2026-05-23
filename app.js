@@ -166,12 +166,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
             feed.appendChild(card);
 
-            // Tarefa 3: Inserção de Ad Placeholder a cada 4 itens
+            // Tarefa 3: Inserção de Anúncio Real a cada 4 itens no Feed
             if ((index + 1) % 4 === 0 && index !== gameResults.length - 1) {
-                const ad = document.createElement('div');
-                ad.className = "ad-placeholder-feed w-full h-32 bg-surface-soft dark:bg-ink border border-dashed border-hairline-soft dark:border-muted rounded-airbnb-md flex items-center justify-center text-muted dark:text-muted-dark text-xs italic";
-                ad.textContent = "Sugestão para o Casal (Anúncio)";
-                feed.appendChild(ad);
+                const adContainer = document.createElement('div');
+                adContainer.className = "w-full min-h-[90px] bg-surface-soft dark:bg-surface-dark border border-hairline-soft dark:border-white/10 rounded-airbnb-md flex items-center justify-center text-muted dark:text-muted-dark text-xs italic";
+                
+                const ins = document.createElement('ins');
+                ins.className = 'adsbygoogle';
+                ins.style.display = 'block';
+                ins.setAttribute('data-ad-client', 'ca-pub-4931701600814773');
+                ins.setAttribute('data-ad-slot', '9139439672');
+                ins.setAttribute('data-ad-format', 'auto');
+                ins.setAttribute('data-full-width-responsive', 'true');
+                
+                adContainer.appendChild(ins);
+                feed.appendChild(adContainer);
+
+                // Dispara o carregamento do anúncio para este slot específico no feed
+                try {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.error("Erro ao carregar AdSense no feed:", e);
+                }
             }
         });
         window.scrollTo(0, 0);
