@@ -244,6 +244,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             titleElement.textContent = "Vocês são o Caos! 🔥";
         }
+
+        // Dispara confete se a sintonia for maior que 80%
+        if (overallScore > 80) {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff385c', '#ffffff', '#92174d'], // Cores baseadas no design (Rausch, White, Plus)
+                disableForReducedMotion: true
+            });
+        }
     };
 
     // Tarefa 4: Web Share API e Fallback
