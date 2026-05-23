@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cartasdecasal.com.br/sitemap.xml
