@@ -1,0 +1,57 @@
+/* Custom styles for Pinterest/Airbnb aesthetic */
+body {
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Implementando a única tier de sombra do DESIGN.md */
+.shadow-sm {
+    box-shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, 
+                rgba(0, 0, 0, 0.04) 0 2px 6px 0, 
+                rgba(0, 0, 0, 0.1) 0 4px 8px 0;
+}
+
+/* Transições suaves */
+.transition-all {
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Custom styles for range input (sliders) to match Airbnb aesthetic */
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default webkit styles */
+    appearance: none;
+    width: 100%;
+    height: 8px; /* Track height */
+    background: var(--tw-colors-hairline-soft); /* Use Tailwind color variable */
+    border-radius: 9999px; /* Full rounded track */
+    outline: none;
+    transition: opacity .2s;
+}
+
+/* Thumb styling for Webkit browsers */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px; /* Thumb size */
+    height: 24px; /* Thumb size */
+    background: var(--tw-colors-rausch); /* Use Tailwind color variable */
+    cursor: pointer;
+    border-radius: 9999px; /* Full rounded thumb */
+    margin-top: -8px; /* Center thumb vertically on track */
+    box-shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, 
+                rgba(0, 0, 0, 0.04) 0 2px 6px 0, 
+                rgba(0, 0, 0, 0.1) 0 4px 8px 0; /* Same shadow as cards */
+}
+
+/* Thumb styling for Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--tw-colors-rausch);
+    cursor: pointer;
+    border-radius: 9999px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, 
+                rgba(0, 0, 0, 0.04) 0 2px 6px 0, 
+                rgba(0, 0, 0, 0.1) 0 4px 8px 0;
+}
